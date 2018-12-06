@@ -143,24 +143,31 @@ Stop/Start processing items in the queue.
 queue.pause(t = 0);
 ```
 * `t [type = int, required]`
- Pause the queue for `t` milliseconds.
+
+Pause the queue for `t` milliseconds.
 
 ### Properties
 
 * `queue.length [type = int]`
+
 The current number of workers in the queue, this does not include workers that are processing.
 
 * `queue.processing [type = int]`
+
 The number of workers that are currently processing.
 
 * `queue.cLimit [type = int]`
+
 The number of queued workers allowed to run at once
 
 * `queue.qLimit [type = int]`
+
 The number of items that may exist in the queue, if an attempt is made to add an item to the queue that would bring the total length over the limit, a promise rejection will be sent immediately
 
 * `queue.active [type = boolean]`
+
 Whether or not the queue is actively processing workers.
 
-* `queue.next [type = callable, return = queued worker, default = Array.prototype.shift]`
+* `queue.next [type = callable, return = queued worker, default =  Array.prototype.shift]`
+
 **Advanced!** Replace this with your own function (or Array.prototype.pop) to turn this into a LIFO queue. The function will receive the queued workers as the `this` context
