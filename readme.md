@@ -1,4 +1,4 @@
-# Overview
+## ReQueue
 
 Basic module for creating a promise based FIFO queue, allows configurable concurrent workers, queue length, and promise engine. Supports push, unshift, shift, pop, start, stop, pause, along with retries for failed workers.
 
