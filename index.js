@@ -7,6 +7,7 @@ module.exports = class promiseQueue{
 		this.processing = this.length = 0;
 		this.queue = [];
 		this.active = true;
+		this.next = Array.prototype.shift;
 	}
 	push(...a){return this._add('push', ...a);}
 	unshift(...a){return this._add('unshift', ...a);}
@@ -52,7 +53,7 @@ module.exports = class promiseQueue{
 	process(){
 		while(this.active && this.queue.length && this.processing < this.cLimit){
 			this.processing++;
-			this.queue.shift()();
+			this.next.apply(this.queue)();
 			this.length = this.queue.length;
 		}
 	}

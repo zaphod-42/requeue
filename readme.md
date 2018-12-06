@@ -1,6 +1,6 @@
-## ReQueue
+# Overview
 
-Basic module for creating a promise based FIFO queue, allows configurable concurrent workers, queue length, and promise engine. Supports push, unshift, shift, pop, start, stop, pause, along with retries for failed workers.
+Basic module for creating a promise based queue, allows configurable concurrent workers, queue length, and promise engine. Supports push, unshift, shift, pop, start, stop, pause, along with retries for failed workers.
 
 ### Installation
 
@@ -107,7 +107,7 @@ queue.unshift(func, [retries = 0, [waitTimeout = 0]])
 ```
  Push a function to the end of the queue, or unshift to the beginning. Both of these methods will return a Promise object which will either resolve or reject after it has been processed.
 
- * `func [type = callable, required]`
+ * `func [type = callable, return = Promise, required]`
  Any callable that returns a Promise.
 
 * `retries [type = int, default = 0]`
@@ -155,3 +155,6 @@ The number of items that may exist in the queue, if an attempt is made to add an
 
 * `queue.active [type = boolean]`
 Whether or not the queue is actively processing workers.
+
+* `queue.next [type = callable, return = queued worker, default = Array.prototype.shift]`
+**Advanced!** Replace this with your own function (or Array.prototype.pop) to turn this into a LIFO queue. The function will receive the queued workers as the `this` context
