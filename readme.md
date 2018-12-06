@@ -91,13 +91,16 @@ function initSomething(portNumber=10001, cb){
 var queue = new Queue(concurrentWorkers = 1, queueLimit = Infinity, promise = Promise);
 ```
 * `concurrentWorkers [type = int, default = 1]`
- The number of queued workers allowed to run at once
+
+The number of queued workers allowed to run at once
 
 * `queueLimit [type = int, default = Infinity]`
- The number of items that may exist in the queue, if an attempt is made to add an item to the queue that would bring the total length over the limit, a promise rejection will be sent immediately
+
+The number of items that may exist in the queue, if an attempt is made to add an item to the queue that would bring the total length over the limit, a promise rejection will be sent immediately
 
 * `promise [type = Promise engine, default = global Promise]`
- The Promise engine to be used, this allows the queue to be used with bluebird or a promise engine other than the native one.
+
+The Promise engine to be used, this allows the queue to be used with bluebird or a promise engine other than the native one.
 
 ### Methods
 
@@ -108,12 +111,15 @@ queue.unshift(func, [retries = 0, [waitTimeout = 0]])
  Push a function to the end of the queue, or unshift to the beginning. Both of these methods will return a Promise object which will either resolve or reject after it has been processed.
 
  * `func [type = callable, return = Promise, required]`
- Any callable that returns a Promise.
+
+Any callable that returns a Promise.
 
 * `retries [type = int, default = 0]`
+
 The number of times to retry this function upon failure. The promise returned by the callable will still reject appropriately even if retries are used, but after the given number of retries have all failed.
 
 * `waitTimeout [type = int, required = 0]`
+
 If this should be retried, the wait timeout defines how many milliseconds to pause the queue between retries.
 
 ```javascript
