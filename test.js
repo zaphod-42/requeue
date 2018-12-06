@@ -1,4 +1,4 @@
-const Queue = require('./pqueue');
+const Queue = require('./index.js');
 
 var queue = new Queue(3);
 

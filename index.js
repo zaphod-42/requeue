@@ -3,7 +3,7 @@ module.exports = class promiseQueue{
 		this.cLimit = concurrentLimit;
 		this.qLimit = queueLimit;
 		this.Promise = promise;
-		
+
 		this.processing = this.length = 0;
 		this.queue = [];
 		this.active = true;
