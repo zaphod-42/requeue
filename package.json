@@ -1,7 +1,7 @@
 {
   "name": "requeued",
   "version": "1.0.0",
-  "description": "Basic module for FIFO queue, supports configurable concurrent workers, queue length, and promise engine. Supports push, unshift, shift, and pop, along with retries for failed workers.",
+  "description": "Basic module for a Promise based FIFO queue, supports configurable concurrent workers, queue length, and promise engine. Supports push, unshift, shift, and pop, along with retries for failed workers.",
   "main": "pqueue.js",
   "scripts": {
     "test": "node test.js"
