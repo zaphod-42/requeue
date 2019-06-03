@@ -7,7 +7,7 @@ Basic module for creating a promise based queue, allows configurable concurrent 
 This library can be installed with npm with the following command:
 
 ```cli
-npm i requeue
+npm i requeued
 ```
 A simple delayed retry queue is set up and can be seen by running the test file
 ```cli
@@ -18,7 +18,7 @@ npm test
 
 You can create a minimal single concurrent worker queue by simply requiring the module and instantiating an object
 ```javascript
-const Queue = require('./requeue');
+const Queue = require('requeued');
 
 var queue = new Queue();
 ```
@@ -140,11 +140,15 @@ queue.start();
 Stop/Start processing items in the queue.
 
 ```javascript
-queue.pause(t = 0);
+queue.pause(t = 0, method = 'unshift');
 ```
 * `t [type = int, required]`
 
 Pause the queue for `t` milliseconds.
+
+* `method [type = string, default="unshift"]`
+
+Where to add the pause, by default it will happen immediately following the completion of any currently processing worker, change method to "push" to add the pause in at the end of the current queue.
 
 ### Properties
 

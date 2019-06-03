@@ -21,8 +21,8 @@ module.exports = class promiseQueue{
 		this.active = true;
 		this.process();
 	}
-	pause(t = 0){
-		this.unshift(() => {
+	pause(t = 0, m = 'unshift'){
+		this[m](() => {
 			return new this.Promise((f,r) => {
 				setTimeout(f, t);
 			});
