@@ -123,6 +123,17 @@ The number of times to retry this function upon failure. The promise returned by
 If this should be retried, the wait timeout defines how many milliseconds to pause the queue between retries.
 
 ```javascript
+queue.any(funcs)
+```
+Similar to the `Array.prototype.some()` method, when sent a list of functions, a Promise will be returned and either resolve with the first successful queued function, or reject with an array of all rejectioned messages.
+
+**Note!** This method will throw an error if you attempt to call it on a non-empty queue.
+
+* `funcs [type = Array]`
+
+Array of callables that return Promises.
+
+```javascript
 queue.shift();
 queue.pop();
 ```

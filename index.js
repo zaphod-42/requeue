@@ -8,6 +8,28 @@ module.exports = class promiseQueue{
 		this.queue = [];
 		this.active = true;
 		this.next = Array.prototype.shift;
+
+		this.firstFulfill = false;
+		this.allReject = false;
+	}
+	any(f){
+		if(this.length){
+			throw 'Tried to use the "any" method on a non-empty queue';
+			return false;
+		}
+		return new Promise((fulfill, reject) => {
+			var rejects = [];
+			this.firstFulfill = (r) => {
+				this.flush();
+				fulfill(r);
+			};
+			this.allReject = (r) => {
+				rejects.push(r);
+				if(!this.queue.length) reject(rejects);
+			};
+			console.log(f);
+			f.map((_f) => this._add('push', _f));
+		});
 	}
 	push(...a){return this._add('push', ...a);}
 	unshift(...a){return this._add('unshift', ...a);}
@@ -32,12 +54,15 @@ module.exports = class promiseQueue{
 	_add(m,f,r=false,t=0){
 		if(this.qLimit == this.queue.length) return this.Promise.reject('Queue Full');
 		return new this.Promise((fulfill, reject) => {
+			var _fulfill = !this.firstFulfill ? fulfill : this.firstFulfill.bind(this);
+			var _reject = !this.firstFulfill ? reject : this.allReject.bind(this);
+
 			this.length = this.queue[m](() => {
-				f().then(fulfill).catch((err) => {
+				f().then(_fulfill).catch((err) => {
 					if(r){
 						this.unshift(f, r-1, t).then(fulfill).catch(reject);
 						this.pause(t);
-					}else reject(err);
+					}else _reject(err);
 				}).then((c) => {
 					this.process(--this.processing);
 				});
