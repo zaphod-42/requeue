@@ -2,7 +2,7 @@ const Queue = require('./index.js');
 
 var tests = {
 	retryTest: () => {
-		var queue = new Queue(3);
+		var queue = new Queue(1);
 
 		var count = 20;
 
@@ -34,4 +34,5 @@ var tests = {
 	}
 }
 
-tests.anyMethod(11);
+tests.retryTest();
+//tests.anyMethod(11);

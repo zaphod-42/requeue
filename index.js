@@ -27,7 +27,6 @@ module.exports = class promiseQueue{
 				rejects.push(r);
 				if(!this.queue.length) reject(rejects);
 			};
-			console.log(f);
 			f.map((_f) => this._add('push', _f));
 		});
 	}
